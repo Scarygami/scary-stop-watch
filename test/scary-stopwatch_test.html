@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>scary-stopwatch test</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+
+    <script type="module" src="../scary-stopwatch.js"></script>
+  </head>
+  <body>
+
+    <test-fixture id="TestFixture">
+      <template>
+        <scary-stopwatch></scary-stopwatch>
+      </template>
+    </test-fixture>
+
+    <script type="module">
+      suite('scary-cube', () => {
+        var element;
+
+        setup(() => {
+          element = fixture('TestFixture');
+        });
+
+        test('a new stopwatch has time 0', () => {
+          assert.equal(element.time, 0);
+        });
+
+        test('starting the stopwatch works', (done) => {
+          element.start();
+          window.setTimeout(() => {
+            assert.notEqual(element.time, 0);
+            done();
+          }, 50);
+        });
+
+        test('stopping the stopwatch works', (done) => {
+          element.start();
+          window.setTimeout(() => {
+            element.stop();
+            const time = element.time;
+            window.setTimeout(() => {
+              assert.equal(element.time, time);
+              done();
+            }, 50);
+          }, 50);
+        });
+
+        test('resetting the stopwatch works', (done) => {
+          element.start();
+          window.setTimeout(() => {
+            element.stop();
+            element.reset();
+            assert.equal(element.time, 0);
+            done();
+          }, 50);
+        });
+
+        test('continuing the stopwatch works', (done) => {
+          element.start();
+          window.setTimeout(() => {
+            element.stop();
+            const time = element.time;
+            element.start(true);
+            window.setTimeout(() => {
+              assert.isAbove(element.time, time);
+              done();
+            }, 50);
+          }, 200);
+        });
+      });
+    </script>
+
+  </body>
+</html>

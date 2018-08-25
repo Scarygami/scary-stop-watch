@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>scary-cube demo</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+    </script>
+
+    <script type="module" src="../scary-stopwatch.js"></script>
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        button {
+          margin: 2px;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic scary-stopwatch demo</h3>
+      <demo-snippet>
+        <template>
+          <scary-stopwatch></scary-stopwatch>
+        </template>
+      </demo-snippet>
+      <div class="horizontal-section-container">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="continue">Continue</button>
+        <button id="reset">Reset</button>
+      </div>
+    </div>
+    <script>
+      (function () {
+        document.querySelector('#start').onclick = function () {
+          document.querySelector('scary-stopwatch').start();
+        }
+
+        document.querySelector('#stop').onclick = function () {
+          document.querySelector('scary-stopwatch').stop();
+        }
+
+        document.querySelector('#continue').onclick = function () {
+          document.querySelector('scary-stopwatch').start(true);
+        }
+
+        document.querySelector('#reset').onclick = function () {
+          document.querySelector('scary-stopwatch').reset();
+        }
+      }());
+    </script>
+  </body>
+</html>
