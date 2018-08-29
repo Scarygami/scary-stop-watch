@@ -56,7 +56,7 @@ class ScaryStopwatch extends LitElement {
   }
 
 
-  _render ({_time}) {
+  render () {
     const style = html`
       <style>
         :host {
@@ -70,12 +70,13 @@ class ScaryStopwatch extends LitElement {
       </style>
     `;
 
-    const milliseconds = _time % 1000;
-    _time = (_time - milliseconds) / 1000;
-    const seconds = _time % 60;
-    _time = (_time - seconds) / 60;
-    const minutes = _time % 60;
-    const hours = (_time - minutes) / 60;
+    let time = this._time;
+    const milliseconds = time % 1000;
+    time = (time - milliseconds) / 1000;
+    const seconds = time % 60;
+    time = (time - seconds) / 60;
+    const minutes = time % 60;
+    const hours = (time - minutes) / 60;
 
     let display = '';
     if (hours > 0) {
