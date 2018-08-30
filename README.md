@@ -1,30 +1,24 @@
-# \<scary-cube\>
+# \<scary-stopwatch\>
 
-Rubik's Cube implemented as Polymer Element.
+A simple stopwatch web-component.
 
-Needs to be sized (best by fitting it into a parent element) to correctly display and scale.
+Most styling can happen directly on the element.
 
-Orientation of cube can be changed with mouse and touch gestures.
-
-Moves need to be performed using the `addMove` or `addMoves` methods, using SiGN notation.
-
-Colors of the cube can be changed using the following custom CSS properties, matching the sides of the cube
+There's a custom property for the font-size of the milliseconds.
 
 ```
-scary-cube {
-  --cube-color-u: white;
-  --cube-color-d: yellow;
-  --cube-color-f: green;
-  --cube-color-b: #3333FF;
-  --cube-color-l: orange;
-  --cube-color-r: red;
+scary-stopwatch {
+  font-size: 16px;
+  --font-size-ms: 60%;
 }
 ```
 
-Additionaly the speed of the move animations can be adjusted with the `--cube-speed` parameter
+Supported methods of the element are:
 
-```
-scary-cube {
-  --cube-speed: 0.4s;
-}
-```
+`.start(resume)` - Starts the stopwatch. If `resume` is true the time will continue from when it was last stopped. Otherwise it will start from 00:00
+
+`.stop()` - Stops the stopwatch.
+
+`.reset()` - Resets the time to 00:00.
+
+The current time (in ms) can be read from the `.time` property.

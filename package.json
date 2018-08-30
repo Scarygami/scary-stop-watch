@@ -1,6 +1,6 @@
 {
   "name": "@scarygami/scary-stopwatch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple stopwatch web-component.",
   "main": "scary-stopwatch.js",
   "homepage": "https://github.com/Scarygami/scary-stopwatch",
@@ -18,5 +18,8 @@
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
     "@webcomponents/webcomponentsjs": "^2.1.0",
     "wct-browser-legacy": "^1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
