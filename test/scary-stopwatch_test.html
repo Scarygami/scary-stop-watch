@@ -73,6 +73,18 @@
             }, 50);
           }, 200);
         });
+
+        test('time-changed events are triggered', (done) => {
+          const listener = (e) => {
+            assert.isOk(e.detail);
+            assert.isOk(e.detail.time);
+            element.removeEventListener('time-changed', listener);
+            done();
+          }
+          element.addEventListener('time-changed', listener);
+          element.start();
+        });
+
       });
     </script>
 

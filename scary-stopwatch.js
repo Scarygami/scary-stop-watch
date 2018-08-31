@@ -117,12 +117,25 @@ class ScaryStopwatch extends LitElement {
     this._animationFrame = window.requestAnimationFrame(this._boundTimer);
   }
 
+  _notify(time) {
+    this.dispatchEvent(new CustomEvent('time-changed', {
+      detail: {time}
+    }));
+  }
+
+  /**
+   * Stops the stopwatch
+   */
   stop() {
     if (!this._running) {
       return;
     }
     this._running = false;
-    this._time += Date.now() - this._lastTime;
+    const dif = Date.now() - this._lastTime
+    if (dif != 0) {
+      this._time += Date.now() - this._lastTime;
+      this._notify(this._time);
+    }
 
     if (this._animationFrame) {
       window.cancelAnimationFrame(this._animationFrame);
@@ -136,6 +149,7 @@ class ScaryStopwatch extends LitElement {
     }
     const now = Date.now();
     this._time += now - this._lastTime;
+    this._notify(this._time);
     this._lastTime = now;
     this._animationFrame = window.requestAnimationFrame(this._boundTimer);
   }
