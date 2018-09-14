@@ -11,12 +11,12 @@
   "author": "Gerwin Sturm",
   "license": "Apache-2.0",
   "dependencies": {
-    "@polymer/lit-element": "^0.6.0-dev.6"
+    "@polymer/lit-element": "^0.6.0"
   },
   "devDependencies": {
     "@polymer/iron-component-page": "^3.0.0-pre.21",
-    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
-    "@webcomponents/webcomponentsjs": "^2.1.0",
+    "@polymer/iron-demo-helpers": "^3.0.2",
+    "@webcomponents/webcomponentsjs": "^2.1.2",
     "wct-browser-legacy": "^1.0.0"
   },
   "publishConfig": {

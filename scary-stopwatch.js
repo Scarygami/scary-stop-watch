@@ -148,9 +148,12 @@ class ScaryStopwatch extends LitElement {
       return;
     }
     const now = Date.now();
-    this._time += now - this._lastTime;
-    this._notify(this._time);
-    this._lastTime = now;
+    const dif = Date.now() - this._lastTime
+    if (dif != 0) {
+      this._time += now - this._lastTime;
+      this._notify(this._time);
+      this._lastTime = now;
+    }
     this._animationFrame = window.requestAnimationFrame(this._boundTimer);
   }
 }
