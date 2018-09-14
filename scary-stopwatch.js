@@ -56,7 +56,7 @@ class ScaryStopwatch extends LitElement {
   }
 
 
-  _render ({_time}) {
+  render () {
     const style = html`
       <style>
         :host {
@@ -70,12 +70,13 @@ class ScaryStopwatch extends LitElement {
       </style>
     `;
 
-    const milliseconds = _time % 1000;
-    _time = (_time - milliseconds) / 1000;
-    const seconds = _time % 60;
-    _time = (_time - seconds) / 60;
-    const minutes = _time % 60;
-    const hours = (_time - minutes) / 60;
+    let time = this._time;
+    const milliseconds = time % 1000;
+    time = (time - milliseconds) / 1000;
+    const seconds = time % 60;
+    time = (time - seconds) / 60;
+    const minutes = time % 60;
+    const hours = (time - minutes) / 60;
 
     let display = '';
     if (hours > 0) {
@@ -116,12 +117,25 @@ class ScaryStopwatch extends LitElement {
     this._animationFrame = window.requestAnimationFrame(this._boundTimer);
   }
 
+  _notify(time) {
+    this.dispatchEvent(new CustomEvent('time-changed', {
+      detail: {time}
+    }));
+  }
+
+  /**
+   * Stops the stopwatch
+   */
   stop() {
     if (!this._running) {
       return;
     }
     this._running = false;
-    this._time += Date.now() - this._lastTime;
+    const dif = Date.now() - this._lastTime
+    if (dif != 0) {
+      this._time += Date.now() - this._lastTime;
+      this._notify(this._time);
+    }
 
     if (this._animationFrame) {
       window.cancelAnimationFrame(this._animationFrame);
@@ -135,6 +149,7 @@ class ScaryStopwatch extends LitElement {
     }
     const now = Date.now();
     this._time += now - this._lastTime;
+    this._notify(this._time);
     this._lastTime = now;
     this._animationFrame = window.requestAnimationFrame(this._boundTimer);
   }
